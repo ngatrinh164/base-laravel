@@ -15,11 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-Route::post('auth/register', [AdminController::class, 'register']);
-Route::post('auth/login', [AdminController::class, 'login']);
-Route::group(['middleware' => 'jwt'], function () {
+Route::post('register', [AdminController::class, 'register']);
+Route::post('login', [AdminController::class, 'login']);
+Route::get('login',  function (Request $request) {
+    return response()->json([
+        'message' => 'Unauthorized',
+        'status' => 401
+    ]);
+})->name('login');
+Route::post('logout', [AdminController::class, 'logout']);
+Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('user-info', [AdminController::class, 'userInfo']);
+});
+Route::get('/test', function (Request $request) {
+    return 'ok';
 });
