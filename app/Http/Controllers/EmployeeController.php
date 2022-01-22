@@ -20,7 +20,8 @@ class EmployeeController extends Controller
      * get all employee
      * 
      */
-    public function index()
+    public function index(Request $request)
     {
+        return $this->employeeService->getItems($request);
     }
 }

@@ -17,4 +17,8 @@ class EquipmentController extends Controller
     {
         $this->equipmentService = $equipmentService;
     }
+    public function index(Request $request)
+    {
+        return $this->equipmentService->getItems($request);
+    }
 }
