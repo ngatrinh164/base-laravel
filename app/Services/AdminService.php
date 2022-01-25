@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Repositories\AdminRepository;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -18,6 +19,9 @@ class AdminService
      *
      * @return \Illuminate\Http\JsonResponse
      */
+    public function __construct()
+    {
+    }
     public function login($request)
     {
         $validator = Validator::make($request->all(), [

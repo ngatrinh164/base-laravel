@@ -12,4 +12,17 @@ class BaseRepository
     {
         $this->model = $model;
     }
+    public function create($item)
+    {
+        $this->model->fill($item);
+        $this->model->save();
+        return $this->model;
+    }
+    public function update($id, $item)
+    {
+        $itemUpdate = $this->model->find($id)->first();
+        $itemUpdate->update($item);
+        $itemUpdate->save();
+        return $itemUpdate;
+    }
 }

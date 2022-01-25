@@ -3,25 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Services\EmployeeService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class EmployeeController extends Controller
+class EmployeeController extends BaseController
 {
-    protected $employeeService;
-    public function __construct(EmployeeService $employeeService)
+    public function __construct()
     {
-        $this->employeeService = $employeeService;
-    }
-    /**
-     * get all employee
-     * 
-     */
-    public function index(Request $request)
-    {
-        return $this->employeeService->getItems($request);
+        parent::__construct(new EmployeeService());
     }
 }
