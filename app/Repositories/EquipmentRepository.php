@@ -21,6 +21,6 @@ class EquipmentRepository extends BaseRepository
     }
     public function find($id)
     {
-        return $this->model->find($id)->first();
+        return $this->model->where('id', $id)->first();
     }
 }

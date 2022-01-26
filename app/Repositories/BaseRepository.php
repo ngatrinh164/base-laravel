@@ -25,4 +25,8 @@ class BaseRepository
         $itemUpdate->save();
         return $itemUpdate;
     }
+    public function find($id)
+    {
+        return $this->model->where('id', $id)->first();
+    }
 }
