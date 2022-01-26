@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Validator;
 class EmployeeService extends BaseService
 {
     use HasFactory;
-    public function __construct()
+    public function __construct(EmployeeRepository $employeeRepository)
     {
-        parent::__construct(new EmployeeRepository());
+        parent::__construct($employeeRepository);
     }
     public function getItems($request)
     {
@@ -25,9 +25,9 @@ class EmployeeService extends BaseService
     }
     public function getItem($request)
     {
-        $id = $request->id || null;
+        $id = $request->id ? $request->id : 0;
         if ($id) {
-            $item = parent::getItem($id);
+            $item = $this->repo->getItem($id);
             return new EmployeeDetail($item);
         }
         return response()->json([

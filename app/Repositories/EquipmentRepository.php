@@ -7,7 +7,6 @@ use App\Repositories\BaseRepository;
 
 class EquipmentRepository extends BaseRepository
 {
-    protected $equipment;
     public function __construct(Equipment $equipment)
     {
         parent::__construct($equipment);
@@ -15,5 +14,13 @@ class EquipmentRepository extends BaseRepository
     public function getItems($per_page)
     {
         return $this->model->with('category')->with('status')->paginate($per_page);
+    }
+    public function getItem($id)
+    {
+        return $this->model->with('status')->with('category')->with('status_log')->with('repair')->with('liquidation')->with('request')->where('id', $id)->first();
+    }
+    public function find($id)
+    {
+        return $this->model->find($id)->first();
     }
 }

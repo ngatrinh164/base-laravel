@@ -6,8 +6,8 @@ use App\Services\EmployeeService;
 
 class EmployeeController extends BaseController
 {
-    public function __construct()
+    public function __construct(EmployeeService $employeeService)
     {
-        parent::__construct(new EmployeeService());
+        parent::__construct($employeeService);
     }
 }

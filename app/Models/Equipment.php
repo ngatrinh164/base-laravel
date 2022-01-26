@@ -15,6 +15,32 @@ class Equipment extends BaseModel
     }
     public function status()
     {
-        return $this->hasOne('App\Models\EquipmentStatus', 'id', 'equipment_id');
+        return $this->hasOne('App\Models\EquipmentStatus', 'equipment_id', 'id');
     }
+    public function status_log()
+    {
+        return $this->hasMany('App\Models\EquipmentStatusLog', 'equipment_id', 'id');
+    }
+    public function repair()
+    {
+        return $this->hasMany('App\Models\Repair', 'equipment_id', 'id');
+    }
+    public function liquidation()
+    {
+        return $this->hasOne('App\Models\Liquidation', 'equipment_id', 'id');
+    }
+    public function request()
+    {
+        return $this->hasMany('App\Models\Request', 'equipment_id', 'id');
+    }
+    protected $fillable = [
+        "code",
+        "imported_date",
+        "producer",
+        "image",
+        "notes",
+        "category_id",
+        "price",
+        "name"
+    ];
 }
