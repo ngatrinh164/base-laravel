@@ -24,7 +24,7 @@ class CategoryService extends BaseService
     {
         $id = $request->id ? $request->id : 0;
         if ($id) {
-            $item = $this->repo->getItem($id);
+            $item = $this->repo->find($id);
             return $item;
         }
         return response()->json([
