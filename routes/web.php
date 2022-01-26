@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EquipmentController;
 use Illuminate\Support\Facades\Route;
@@ -39,4 +40,11 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::put('/category/{id}', [CategoryController::class, 'update']);
     Route::delete('/category/{id}', [CategoryController::class, 'delete']);
     Route::get('/category/{id}', [CategoryController::class, 'show']);
+});
+Route::group(['middleware' => 'auth:admin'], function () {
+    Route::get('/departments', [DepartmentController::class, 'index']);
+    Route::post('/department', [DepartmentController::class, 'store']);
+    Route::put('/department/{id}', [DepartmentController::class, 'update']);
+    Route::delete('/department/{id}', [DepartmentController::class, 'delete']);
+    Route::get('/department/{id}', [DepartmentController::class, 'show']);
 });
