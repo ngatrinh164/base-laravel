@@ -20,7 +20,7 @@ class EmployeeRepository extends BaseRepository
     public function getItem($id)
     {
         return $this->model->with('department')->with('request')->with('equipment_status_log')
-            ->with('liquidation')->with('repair')->where('id', $id)->get();
+            ->with('liquidation')->with('repair')->where('id', $id)->first();
     }
     public function find($id)
     {
