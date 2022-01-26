@@ -57,8 +57,8 @@ class EquipmentService extends BaseService
             'code' => $request->code,
             'imported_date' => $request->imported_date,
             'producer' => $request->producer,
-            'image' => $request->image || '',
-            'notes' => $request->notes || '',
+            'image' => $request->image ? $request->name : '',
+            'notes' => $request->notes ? $request->notes : '',
             'category_id' => $request->category_id,
             'price' => $request->price,
             'name' => $request->name,
@@ -96,11 +96,11 @@ class EquipmentService extends BaseService
             'code' => $request->code,
             'imported_date' => $request->imported_date,
             'producer' => $request->producer,
-            'image' => $request->image || '',
-            'notes' => $request->notes || '',
+            'image' => $request->image ? $request->name : '',
+            'notes' => $request->notes ? $request->notes : '',
             'category_id' => $request->category_id,
-            'price' => $request->price || '',
-            'name' => $request->name || '',
+            'price' => $request->price,
+            'name' => $request->name,
         ];
         $res = $this->repo->update($id, $data);
         return response()->json([

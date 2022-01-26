@@ -58,8 +58,8 @@ class EmployeeService extends BaseService
             'email' => $request->email,
             'department_id' => $request->department_id,
             'password' => Hash::make($request->password),
-            'address' => $request->address || '',
-            'phone_number' => $request->phone_number || '',
+            'address' => $request->address ? $request->address : '',
+            'phone_number' => $request->phone_number ? $request->phone_number : '',
             'is_manager' => $request->is_manager
         ];
         $res = $this->repo->create($data);
@@ -95,8 +95,8 @@ class EmployeeService extends BaseService
             'join_date' => $request->join_date,
             'name' => $request->name,
             'department_id' => $request->department_id,
-            'address' => $request->address || '',
-            'phone_number' => $request->phone_number || '',
+            'address' => $request->address ? $request->address : '',
+            'phone_number' => $request->phone_number ? $request->phone_number : '',
             'is_manager' => $request->is_manager
         ];
         $res = $this->repo->update($id, $data);
