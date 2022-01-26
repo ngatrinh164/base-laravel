@@ -35,8 +35,8 @@ Route::group(['middleware' => 'auth:admin'], function () {
 });
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/categories', [CategoryController::class, 'index']);
-    Route::post('/categorie', [CategoryController::class, 'store']);
-    Route::put('/categorie/{id}', [CategoryController::class, 'update']);
-    Route::delete('/categorie/{id}', [CategoryController::class, 'delete']);
-    Route::get('/categorie/{id}', [CategoryController::class, 'show']);
+    Route::post('/category', [CategoryController::class, 'store']);
+    Route::put('/category/{id}', [CategoryController::class, 'update']);
+    Route::delete('/category/{id}', [CategoryController::class, 'delete']);
+    Route::get('/category/{id}', [CategoryController::class, 'show']);
 });

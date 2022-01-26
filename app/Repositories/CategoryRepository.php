@@ -16,4 +16,8 @@ class CategoryRepository extends BaseRepository
     {
         return $this->model->paginate($per_page);
     }
+    public function find($id)
+    {
+        return $this->model->find($id)->first();
+    }
 }
