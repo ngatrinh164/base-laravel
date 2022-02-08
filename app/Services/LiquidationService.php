@@ -7,9 +7,11 @@ use App\Http\Resources\EquipmentListResource;
 use App\Repositories\EquipmentRepository;
 use App\Repositories\EquipmentStatusLogRepository;
 use App\Repositories\EquipmentStatusRepository;
+use App\Repositories\LiquidationRepository;
 use Error;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -17,20 +19,19 @@ use Illuminate\Support\Facades\Hash;
 
 
 
-class EquipmentService extends BaseService
+class LiquidationService extends BaseService
 {
-    protected $equipmentRepository;
-    protected $equipmentStatusRepo;
     use HasFactory;
-    public function __construct(EquipmentRepository $equipmentRepository, EquipmentStatusRepository $equipmentStatusRepo)
+    protected $liquidationRepo;
+
+    public function __construct(LiquidationRepository $liquidationRepo)
     {
-        parent::__construct($equipmentRepository);
-        $this->equipmentStatusRepo = $equipmentStatusRepo;
+        parent::__construct($liquidationRepo);
     }
     public function getItems($request)
     {
         $items = $this->fetchItems($request);
-        return new EquipmentListResource($items);
+        return $items;
     }
     public function getItem($request)
     {
@@ -48,12 +49,10 @@ class EquipmentService extends BaseService
         try {
             DB::beginTransaction();
             $validator = Validator::make($request->all(), [
-                'code' => 'required',
-                'imported_date' => 'required',
-                'producer' => 'required',
-                'category_id' => 'required',
+                'equipment_id' => 'required',
+                'place' => 'required',
+                'details' => 'required',
                 'price' => 'required',
-                'name' => 'required'
             ]);
 
             if ($validator->fails()) {
@@ -62,22 +61,14 @@ class EquipmentService extends BaseService
                 ], 400);
             }
             $data = [
-                'code' => $request->code,
-                'imported_date' => $request->imported_date,
-                'producer' => $request->producer,
-                'image' => $request->image ? $request->name : '',
-                'notes' => $request->notes ? $request->notes : '',
-                'category_id' => $request->category_id,
+                'equipment_id' => $request->equipment_id,
+                'place' => $request->place,
+                'details' => $request->details,
                 'price' => $request->price,
-                'name' => $request->name,
+                'employee_id' => Auth::user()->id,
+                'notes' => $request->notes ? $request->notes : '',
             ];
             $res = $this->repo->create($data);
-            // create status
-            $this->equipmentStatusRepo->create([
-                'equipment_id' => $res->id,
-                'type' => EquipmentStatusType::FREE,
-                'status' => 100
-            ]);
             DB::commit();
             return response()->json([
                 'message' => 'success',
@@ -94,12 +85,10 @@ class EquipmentService extends BaseService
     public function updateItem($request)
     {
         $validator = Validator::make($request->all(), [
-            'code' => 'required',
-            'imported_date' => 'required',
-            'producer' => 'required',
-            'category_id' => 'required',
+            'equipment_id' => 'required',
+            'place' => 'required',
+            'details' => 'required',
             'price' => 'required',
-            'name' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -115,14 +104,12 @@ class EquipmentService extends BaseService
             ], 404);
         }
         $data = [
-            'code' => $request->code,
-            'imported_date' => $request->imported_date,
-            'producer' => $request->producer,
-            'image' => $request->image ? $request->name : '',
-            'notes' => $request->notes ? $request->notes : '',
-            'category_id' => $request->category_id,
+            'equipment_id' => $request->equipment_id,
+            'place' => $request->place,
+            'details' => $request->details,
             'price' => $request->price,
-            'name' => $request->name,
+            'employee_id' => Auth::user()->id,
+            'notes' => $request->notes ? $request->notes : '',
         ];
         $res = $this->repo->update($id, $data);
         return response()->json([

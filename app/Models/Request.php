@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Request extends BaseModel
 {
     use HasFactory;
+    protected $table = 'request';
 }

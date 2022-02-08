@@ -4,6 +4,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EquipmentController;
+use App\Http\Controllers\LiquidationController;
+use App\Http\Controllers\RepairController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,4 +49,18 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::put('/department/{id}', [DepartmentController::class, 'update']);
     Route::delete('/department/{id}', [DepartmentController::class, 'delete']);
     Route::get('/department/{id}', [DepartmentController::class, 'show']);
+});
+Route::group(['middleware' => 'auth:admin'], function () {
+    Route::get('/liquidations', [LiquidationController::class, 'index']);
+    Route::post('/liquidation', [LiquidationController::class, 'store']);
+    Route::put('/liquidation/{id}', [LiquidationController::class, 'update']);
+    Route::delete('/liquidation/{id}', [LiquidationController::class, 'delete']);
+    Route::get('/liquidation/{id}', [LiquidationController::class, 'show']);
+});
+Route::group(['middleware' => 'auth:admin'], function () {
+    Route::get('/repairs', [RepairController::class, 'index']);
+    Route::post('/repair', [RepairController::class, 'store']);
+    Route::put('/repair/{id}', [RepairController::class, 'update']);
+    Route::delete('/repair/{id}', [RepairController::class, 'delete']);
+    Route::get('/repair/{id}', [RepairController::class, 'show']);
 });

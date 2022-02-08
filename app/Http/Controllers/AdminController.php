@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Services\AdminService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class AdminController extends Controller
+use Illuminate\Http\Request;
+
+class AdminController
 {
     /**
      * Create a new AuthController instance.
