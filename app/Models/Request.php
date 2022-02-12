@@ -9,4 +9,12 @@ class Request extends BaseModel
 {
     use HasFactory;
     protected $table = 'request';
+    protected $fillable = [
+        'equipment_id',
+        'details',
+        'employee_id',
+        'notes',
+        'status',
+        'type'
+    ];
 }

@@ -9,10 +9,9 @@ use BenSampo\Enum\Enum;
  * @method static static OptionTwo()
  * @method static static OptionThree()
  */
-final class RequestType extends Enum
+final class RequestStatus extends Enum
 {
-    const BORROW =   1; // muownj
-    const RETURN =   2; // tra lai
-    const REPAIR = 3;
-    const LIQUIDATIOn = 4;
+    const WAITING = 1;
+    const APPROVE = 2;
+    const REJECT = 3;
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\LiquidationController;
 use App\Http\Controllers\RepairController;
+use App\Http\Controllers\RequestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -63,4 +64,19 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::put('/repair/{id}', [RepairController::class, 'update']);
     Route::delete('/repair/{id}', [RepairController::class, 'delete']);
     Route::get('/repair/{id}', [RepairController::class, 'show']);
+});
+Route::group(['middleware' => 'auth:employee'], function () {
+    Route::get('/employee-requests', [RequestController::class, 'getEmployeeRequest']);
+    Route::post('/employee-request', [RequestController::class, 'createEmployeeRequest']);
+    Route::put('/employee-request/{id}', [RequestController::class, 'updateEmployeeRequest']);
+    Route::delete('/employee-request/{id}', [RequestController::class, 'deleteEmployeeRequest']);
+    Route::get('/employee-request/{id}', [RequestController::class, 'showEmployeeRequest']);
+});
+// create request by admin role
+Route::group(['middleware' => 'auth:admin'], function () {
+    Route::get('/requests', [RequestController::class, 'index']);
+    Route::post('/request', [RequestController::class, 'store']);
+    Route::put('/request/{id}', [RequestController::class, 'update']);
+    Route::delete('/request/{id}', [RequestController::class, 'delete']);
+    Route::get('/request/{id}', [RequestController::class, 'show']);
 });
