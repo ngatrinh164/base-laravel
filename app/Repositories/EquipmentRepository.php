@@ -11,8 +11,12 @@ class EquipmentRepository extends BaseRepository
     {
         parent::__construct($equipment);
     }
-    public function getItems($per_page)
+    public function getItems($per_page, $query = null)
     {
+        $name = $query['name'] ?? '';
+        if ($name) {
+            return $this->model->with('category')->with('status')->where('name', 'like', '%' . $name . '%')->paginate($per_page);
+        }
         return $this->model->with('category')->with('status')->paginate($per_page);
     }
     public function getItem($id)

@@ -13,8 +13,12 @@ class EmployeeRepository extends BaseRepository
     {
         parent::__construct($employee);
     }
-    public function getItems($per_page)
+    public function getItems($per_page, $query = null)
     {
+        $name = $query['name'] ?? '';
+        if ($name) {
+            return $this->model->with('department')->where('name', 'like', '%' . $name . '%')->paginate($per_page);
+        }
         return $this->model->with('department')->paginate($per_page);
     }
     public function getItem($id)

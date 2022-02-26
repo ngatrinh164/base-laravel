@@ -17,7 +17,8 @@ class BaseService
     public function fetchItems($request)
     {
         $per_page = $request->per_page ? $request->per_page : 10;
-        $items = $this->repo->getItems($per_page);
+        $query = $request->all();
+        $items = $this->repo->getItems($per_page, $query);
         return $items;
     }
     public function getItem($id)
