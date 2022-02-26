@@ -25,58 +25,58 @@ Route::get('/', function () {
 });
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/employees', [EmployeeController::class, 'index']);
-    Route::post('/employee', ([EmployeeController::class, 'store']));
-    Route::put('/employee/{id}', [EmployeeController::class, 'update']);
-    Route::delete('/employee/{id}', [EmployeeController::class, 'delete']);
-    Route::get('/employee/{id}', [EmployeeController::class, 'show']);
+    Route::post('/employees', ([EmployeeController::class, 'store']));
+    Route::put('/employees/{id}', [EmployeeController::class, 'update']);
+    Route::delete('/employees/{id}', [EmployeeController::class, 'delete']);
+    Route::get('/employees/{id}', [EmployeeController::class, 'show']);
 });
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/equipments', [EquipmentController::class, 'index']);
-    Route::post('/equipment', [EquipmentController::class, 'store']);
-    Route::put('/equipment/{id}', [EquipmentController::class, 'update']);
-    Route::delete('/equipment/{id}', [EquipmentController::class, 'delete']);
-    Route::get('/equipment/{id}', [EquipmentController::class, 'show']);
+    Route::post('/equipments', [EquipmentController::class, 'store']);
+    Route::put('/equipments/{id}', [EquipmentController::class, 'update']);
+    Route::delete('/equipments/{id}', [EquipmentController::class, 'delete']);
+    Route::get('/equipments/{id}', [EquipmentController::class, 'show']);
 });
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/categories', [CategoryController::class, 'index']);
-    Route::post('/category', [CategoryController::class, 'store']);
-    Route::put('/category/{id}', [CategoryController::class, 'update']);
-    Route::delete('/category/{id}', [CategoryController::class, 'delete']);
-    Route::get('/category/{id}', [CategoryController::class, 'show']);
+    Route::post('/categories', [CategoryController::class, 'store']);
+    Route::put('/categories/{id}', [CategoryController::class, 'update']);
+    Route::delete('/categories/{id}', [CategoryController::class, 'delete']);
+    Route::get('/categories/{id}', [CategoryController::class, 'show']);
 });
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/departments', [DepartmentController::class, 'index']);
-    Route::post('/department', [DepartmentController::class, 'store']);
-    Route::put('/department/{id}', [DepartmentController::class, 'update']);
-    Route::delete('/department/{id}', [DepartmentController::class, 'delete']);
-    Route::get('/department/{id}', [DepartmentController::class, 'show']);
+    Route::post('/departments', [DepartmentController::class, 'store']);
+    Route::put('/departments/{id}', [DepartmentController::class, 'update']);
+    Route::delete('/departments/{id}', [DepartmentController::class, 'delete']);
+    Route::get('/departments/{id}', [DepartmentController::class, 'show']);
 });
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/liquidations', [LiquidationController::class, 'index']);
-    Route::post('/liquidation', [LiquidationController::class, 'store']);
-    Route::put('/liquidation/{id}', [LiquidationController::class, 'update']);
-    Route::delete('/liquidation/{id}', [LiquidationController::class, 'delete']);
-    Route::get('/liquidation/{id}', [LiquidationController::class, 'show']);
+    Route::post('/liquidations', [LiquidationController::class, 'store']);
+    Route::put('/liquidations/{id}', [LiquidationController::class, 'update']);
+    Route::delete('/liquidations/{id}', [LiquidationController::class, 'delete']);
+    Route::get('/liquidations/{id}', [LiquidationController::class, 'show']);
 });
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/repairs', [RepairController::class, 'index']);
-    Route::post('/repair', [RepairController::class, 'store']);
-    Route::put('/repair/{id}', [RepairController::class, 'update']);
-    Route::delete('/repair/{id}', [RepairController::class, 'delete']);
-    Route::get('/repair/{id}', [RepairController::class, 'show']);
+    Route::post('/repairs', [RepairController::class, 'store']);
+    Route::put('/repairs/{id}', [RepairController::class, 'update']);
+    Route::delete('/repairs/{id}', [RepairController::class, 'delete']);
+    Route::get('/repairs/{id}', [RepairController::class, 'show']);
 });
 Route::group(['middleware' => 'auth:employee'], function () {
     Route::get('/employee-requests', [RequestController::class, 'getEmployeeRequest']);
-    Route::post('/employee-request', [RequestController::class, 'createEmployeeRequest']);
-    Route::put('/employee-request/{id}', [RequestController::class, 'updateEmployeeRequest']);
-    Route::delete('/employee-request/{id}', [RequestController::class, 'deleteEmployeeRequest']);
-    Route::get('/employee-request/{id}', [RequestController::class, 'showEmployeeRequest']);
+    Route::post('/employee-requests', [RequestController::class, 'createEmployeeRequest']);
+    Route::put('/employee-requests/{id}', [RequestController::class, 'updateEmployeeRequest']);
+    Route::delete('/employee-requests/{id}', [RequestController::class, 'deleteEmployeeRequest']);
+    Route::get('/employee-requests/{id}', [RequestController::class, 'showEmployeeRequest']);
 });
 // create request by admin role
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/requests', [RequestController::class, 'index']);
-    Route::post('/request', [RequestController::class, 'store']);
-    Route::put('/request/{id}', [RequestController::class, 'update']);
-    Route::delete('/request/{id}', [RequestController::class, 'delete']);
-    Route::get('/request/{id}', [RequestController::class, 'show']);
+    Route::post('/requests', [RequestController::class, 'store']);
+    Route::put('/requests/{id}', [RequestController::class, 'update']);
+    Route::delete('/requests/{id}', [RequestController::class, 'delete']);
+    Route::get('/requests/{id}', [RequestController::class, 'show']);
 });
