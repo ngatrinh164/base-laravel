@@ -53,4 +53,9 @@ class AdminController
     {
         return $this->adminService->userInfo();
     }
+
+    public function updateProfile(Request $request)
+    {
+        return $this->adminService->updateProfile($request);
+    }
 }

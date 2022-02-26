@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Admin;
 use App\Repositories\AdminRepository;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -116,5 +117,23 @@ class AdminService
             'expires_in' => '3600',
             'user' => auth()->guard('admin')->user()
         ]);
+    }
+    public function updateProfile($request)
+    {
+        $query = $request->all();
+        $user_id = auth()->guard('admin')->user()->id;
+        $username = $query['username'] ?? '';
+        if ($username) {
+            $user = Admin::find($user_id)->first();
+            $user->update([
+                'user_name' => $username
+            ]);
+            $user->save();
+            return response()->json([
+                'data' => $user,
+                'message' => 'Update success'
+            ], 200);
+        }
+        return null;
     }
 }

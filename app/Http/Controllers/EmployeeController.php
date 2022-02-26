@@ -45,4 +45,8 @@ class EmployeeController extends BaseController
     {
         return $this->service->userInfo();
     }
+    public function updateprofile(Request $request)
+    {
+        return $this->service->updateprofile($request);
+    }
 }

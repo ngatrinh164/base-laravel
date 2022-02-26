@@ -20,3 +20,4 @@ use App\Http\Controllers\EmployeeController;
 Route::post('login', [EmployeeController::class, 'login']);
 Route::post('logout', [EmployeeController::class, 'logout']);
 Route::get('user-info', [EmployeeController::class, 'userInfo'])->middleware('auth:employee');
+Route::post('update-profile', [EmployeeController::class, 'updateProfile'])->middleware('auth:employee');

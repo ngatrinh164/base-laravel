@@ -14,7 +14,7 @@ class Admin extends Authenticatable implements JWTSubject
     use HasFactory;
     protected $table = 'admin';
     protected $fillable = [
-        'name',
+        'user_name',
         'email',
         'password',
     ];

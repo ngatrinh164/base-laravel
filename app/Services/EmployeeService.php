@@ -201,4 +201,27 @@ class EmployeeService extends BaseService
             'user' => auth()->guard('employee')->user()
         ]);
     }
+    public function updateProfile($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Invalid data'
+            ], 400);
+        }
+        $data = [
+            'name' => $request->name,
+            'address' => $request->address ? $request->address : '',
+            'phone_number' => $request->phone_number ? $request->phone_number : '',
+        ];
+        $employee = auth()->guard('employee')->user();
+        $res = $this->repo->update($employee->id, $data);
+        return response()->json([
+            'message' => 'success',
+            'data' => $res,
+        ], 200);
+    }
 }
