@@ -58,4 +58,8 @@ class AdminController
     {
         return $this->adminService->updateProfile($request);
     }
+    public function changePassword(Request $request)
+    {
+        return $this->adminService->changePassword($request);
+    }
 }

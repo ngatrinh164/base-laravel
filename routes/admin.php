@@ -27,6 +27,7 @@ Route::post('logout', [AdminController::class, 'logout']);
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('user-info', [AdminController::class, 'userInfo']);
     Route::post('update-profile', [AdminController::class, 'updateProfile']);
+    Route::post('change-password', [AdminController::class, 'changePassword']);
 });
 Route::get('/test', function (Request $request) {
     return 'ok';

@@ -49,4 +49,8 @@ class EmployeeController extends BaseController
     {
         return $this->service->updateprofile($request);
     }
+    public function changePassword(Request $request)
+    {
+        return $this->service->changePassword($request);
+    }
 }

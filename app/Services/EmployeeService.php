@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Http\Resources\EmployeeDetail;
 use App\Http\Resources\EmployeeResource;
+use App\Models\Employee;
 use App\Repositories\EmployeeRepository;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -222,5 +223,40 @@ class EmployeeService extends BaseService
             'message' => 'success',
             'data' => $res,
         ], 200);
+    }
+    public function changePassword($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'old_pass' => 'required',
+            'new_pass' => 'required|min:6'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Invalid data'
+            ], 400);
+        }
+        $employee = auth()->guard('employee')->user();
+        $oldPass = $request->old_pass;
+        $newPass = $request->new_pass;
+        $credentials = ['email' => $employee->email, 'password' => $oldPass];
+        $token = auth()->guard('employee')->attempt($credentials);
+        if (!$token) {
+            return response()->json([
+                'message' => 'Password does not match',
+                'data' => null
+            ], 400);
+        }
+        $user = Employee::where('id', $employee->id)->update([
+            'password' => Hash::make($newPass)
+        ]);
+        return response()->json([
+            'message' => 'Update sucess',
+            'data' => $user
+        ], 200);
+        return response()->json([
+            'message' => 'Password does not match',
+            'data' => null
+        ], 400);
     }
 }

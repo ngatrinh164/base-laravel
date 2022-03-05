@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -135,5 +136,40 @@ class AdminService
             ], 200);
         }
         return null;
+    }
+    public function changePassword($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'old_pass' => 'required',
+            'new_pass' => 'required|min:6'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Invalid data'
+            ], 400);
+        }
+        $admin = auth()->guard('admin')->user();
+        $oldPass = $request->old_pass;
+        $newPass = $request->new_pass;
+        $credentials = ['email' => $admin->email, 'password' => $oldPass];
+        $token = auth()->guard('admin')->attempt($credentials);
+        if (!$token) {
+            return response()->json([
+                'message' => 'Password does not match',
+                'data' => null
+            ], 400);
+        }
+        $user = Admin::where('id', $admin->id)->update([
+            'password' => Hash::make($newPass)
+        ]);
+        return response()->json([
+            'message' => 'Update sucess',
+            'data' => $user
+        ], 200);
+        return response()->json([
+            'message' => 'Password does not match',
+            'data' => null
+        ], 400);
     }
 }
