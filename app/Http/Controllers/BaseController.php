@@ -21,7 +21,7 @@ class BaseController extends Controller
     }
     public function update(Request $request)
     {
-        return $this->service->updateItem($request);
+        return $this->service->updateItem($request, $request->id);
     }
     public function delete(Request $request)
     {

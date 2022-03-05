@@ -82,7 +82,7 @@ class LiquidationService extends BaseService
             ], 200);
         }
     }
-    public function updateItem($request)
+    public function updateItem($request, $id)
     {
         $validator = Validator::make($request->all(), [
             'equipment_id' => 'required',
@@ -96,7 +96,6 @@ class LiquidationService extends BaseService
                 'message' => 'Invalid data'
             ], 400);
         }
-        $id = $request->id || 0;
         $item = $this->repo->find($id);
         if (!$item) {
             return response()->json([

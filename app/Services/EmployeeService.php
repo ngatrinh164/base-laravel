@@ -68,7 +68,7 @@ class EmployeeService extends BaseService
             'data' => $res,
         ], 200);
     }
-    public function updateItem($request)
+    public function updateItem($request, $id)
     {
         $validator = Validator::make($request->all(), [
             'code' => 'required',
@@ -83,7 +83,6 @@ class EmployeeService extends BaseService
                 'message' => 'Invalid data'
             ], 400);
         }
-        $id = $request->id || 0;
         $item = $this->repo->find($id);
         if (!$item) {
             return response()->json([

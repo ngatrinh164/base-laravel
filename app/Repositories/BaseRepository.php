@@ -20,7 +20,7 @@ class BaseRepository
     }
     public function update($id, $item)
     {
-        $itemUpdate = $this->model->find($id)->first();
+        $itemUpdate = $this->model->find($id);
         $itemUpdate->update($item);
         $itemUpdate->save();
         return $itemUpdate;
