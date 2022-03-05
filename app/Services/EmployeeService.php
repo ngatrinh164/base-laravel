@@ -120,7 +120,10 @@ class EmployeeService extends BaseService
         if (!$token) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-
+        $employee = auth()->guard('employee')->user();
+        $user = Employee::where('id', $employee->id)->update([
+            'is_first_login' => 0
+        ]);
         return $this->createNewToken($token);
     }
 

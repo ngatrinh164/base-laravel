@@ -44,7 +44,8 @@ class Employee extends Authenticatable implements JWTSubject
         'password',
         'address',
         'phone_number',
-        'is_manager'
+        'is_manager',
+        'is_first_login'
     ];
     public function getJWTIdentifier()
     {
