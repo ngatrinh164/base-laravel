@@ -50,7 +50,6 @@ class EquipmentService extends BaseService
             $validator = Validator::make($request->all(), [
                 'code' => 'required',
                 'imported_date' => 'required',
-                'producer' => 'required',
                 'category_id' => 'required',
                 'price' => 'required',
                 'name' => 'required'
@@ -96,7 +95,6 @@ class EquipmentService extends BaseService
         $validator = Validator::make($request->all(), [
             'code' => 'required',
             'imported_date' => 'required',
-            'producer' => 'required',
             'category_id' => 'required',
             'price' => 'required',
             'name' => 'required'
