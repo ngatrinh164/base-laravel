@@ -15,4 +15,5 @@ final class RequestType extends Enum
     const RETURN =   2; // tra lai
     const REPAIR = 3;
     const LIQUIDATIOn = 4;
+    const LOST = 5; // maat
 }
