@@ -12,8 +12,12 @@ class RequestRepository extends BaseRepository
     {
         parent::__construct($request);
     }
-    public function getItems($per_page)
+    public function getItems($per_page, $request)
     {
+        $type = $request->type ?? '';
+        if ($type) {
+            return $this->model->where('type', $type)->paginate($per_page);
+        }
         return $this->model->paginate($per_page);
     }
     public function getItem($id)
