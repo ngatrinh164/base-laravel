@@ -17,6 +17,7 @@ class Liquidation extends BaseModel
         "price",
         "details",
         "price",
-        "notes"
+        "notes",
+        "image"
     ];
 }
