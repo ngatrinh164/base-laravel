@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Repositories\BaseRepository;
 use Illuminate\Http\Request;
 use App\Models\Request as RequestModel;
+use Illuminate\Support\Facades\Log;
 
 class RequestRepository extends BaseRepository
 {
@@ -14,7 +15,8 @@ class RequestRepository extends BaseRepository
     }
     public function getItems($per_page, $request)
     {
-        $type = $request->type ?? '';
+        $type = $request['type'] ?? '';
+        Log::info($type);
         if ($type) {
             return $this->model->where('type', $type)->paginate($per_page);
         }
