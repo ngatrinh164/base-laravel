@@ -31,4 +31,8 @@ return [
 
     'supports_credentials' => false,
 
+    "Access-Control-Allow-Origin" => ['*'],
+    "Access-Control-Allow-Methods" => ['*'],
+    "Access-Control-Allow-Headers" => ['*']
+
 ];
